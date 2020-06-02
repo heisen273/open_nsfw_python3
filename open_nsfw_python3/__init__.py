@@ -83,7 +83,7 @@ class NSFWClassifier:
 #         with open(filepath, 'rb') as f:
 #             image_data = io.BytesIO(f.read())
 
-        image = Image.open(io.BytesIO(requests.get(url).content))
+        image_data = Image.open(io.BytesIO(requests.get(url).content))
 
         # Pre-load caffe model.
         nsfw_net = caffe.Net(str(self.model_def),  # pylint: disable=invalid-name
