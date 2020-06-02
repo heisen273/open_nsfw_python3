@@ -11,6 +11,7 @@ from pkg_resources import resource_filename
 import io
 import caffe
 import os
+import requests
 
 
 class NSFWClassifier:
@@ -69,18 +70,20 @@ class NSFWClassifier:
         else:
             return []
 
-    def get_score(self, filepath):
+    def get_score(self, url):
         """
         Returns the sexual content score of a given image.
 
-        score = get_score('image1.jpg')
+        score = get_score('http://0.0.0.0/image1.jpg')
 
         Parameters
         ----------
-        filepath : the relative local path of the image file.
+        url : url to the image file.
         """
-        with open(filepath, 'rb') as f:
-            image_data = io.BytesIO(f.read())
+#         with open(filepath, 'rb') as f:
+#             image_data = io.BytesIO(f.read())
+
+        image = Image.open(io.BytesIO(requests.get(url).content))
 
         # Pre-load caffe model.
         nsfw_net = caffe.Net(str(self.model_def),  # pylint: disable=invalid-name
