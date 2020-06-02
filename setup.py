@@ -16,6 +16,7 @@ setuptools.setup(
     install_requires=[
         'numpy>=1.16.4',
         'image>=1.5.27',
+        'requests>=2.19.1',
     ],
     package_data={
         'open_nsfw_python3': ['*.caffemodel', '*.prototxt', '*.md'],
